@@ -17,7 +17,7 @@ app.use("/auth", authRouter);
 app.use("/movie", movieRoute);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({ message: "Routs not found" });
 });
 
 app.use((err, req, res, next) => {

@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 const { Schema, model } = require("mongoose");
 const { handleError } = require("../helpers");
 
@@ -15,7 +15,7 @@ const newSchema = Schema(
     },
     date: {
       type: String,
-      default: "00-00-0000",
+      default: "01-01-1900",
     },
 
     owner: {
@@ -30,8 +30,9 @@ const newSchema = Schema(
 const movieSchemaValidation = Joi.object({
   title: Joi.string().min(2).max(16).required(),
   director: Joi.string().empty(""),
-  date: Joi.string().empty(""),
+  date: Joi.date().format("DD-MM-YYYY").max("now").empty(""),
 });
+
 newSchema.post("save", handleError);
 
 const Movie = model("movie", newSchema);

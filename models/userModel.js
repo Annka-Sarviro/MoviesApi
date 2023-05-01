@@ -2,15 +2,16 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const { handleError } = require("../helpers");
 
-const passwordMessage = "Passwords no contain space, min length 7 characters, max 32.";
+const passwordMessage =
+  "Passwords must contain at least one lowercase letter and one uppercase letter, one numeric, min length 7 characters, max 24.";
 const emailRegex = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/;
-// const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,24}/;
+const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,24}/;
 
 const userSchema = new Schema(
   {
     password: {
       type: String,
-      // match: passwordRegex,
+      match: passwordRegex,
       required: [true, "Password is required"],
     },
     email: {
@@ -36,7 +37,7 @@ userSchema.post("save", handleError);
 const registerJoiSchema = Joi.object({
   password: Joi.string()
     .trim()
-    // .regex(passwordRegex)
+    .regex(passwordRegex)
     .required()
     .messages({
       "string.empty": `password must contain value`,

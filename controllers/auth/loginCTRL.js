@@ -1,9 +1,10 @@
+const createError = require("http-errors");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const { User } = require("../../models/userModel");
 const { SECRET_KEY } = process.env;
-const createError = require("http-errors");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -20,11 +21,7 @@ const login = async (req, res) => {
   const payload = {
     id: user._id,
   };
-  const token = jwt.sign(
-    payload,
-    SECRET_KEY
-    // { expiresIn: "12h" }
-  );
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "12h" });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({

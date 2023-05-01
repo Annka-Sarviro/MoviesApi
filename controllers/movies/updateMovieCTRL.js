@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const { Movie } = require("../../models/moviesModel");
 
 const updateMoviesCTRL = async (req, res) => {
@@ -6,12 +7,12 @@ const updateMoviesCTRL = async (req, res) => {
   const { _id: owner } = req.user;
 
   if (!data) {
-    return res.status(400).json({ message: "please add data" });
+    throw createError(400, { message: "please add data" });
   }
 
   const newData = await Movie.findOneAndUpdate({ _id: id, owner }, data, { new: true });
 
-  if (!data) {
+  if (!newData) {
     return res.status(404).json({ message: "User's movies with such id not found" });
   }
 

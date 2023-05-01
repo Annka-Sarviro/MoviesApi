@@ -1,4 +1,4 @@
-const { RequestError } = require("../../helpers");
+const createError = require("http-errors");
 const { Movie } = require("../../models/moviesModel");
 
 const deleteMovie = async (req, res) => {
@@ -6,7 +6,7 @@ const deleteMovie = async (req, res) => {
   const { _id: owner } = req.user;
 
   if (!movieId) {
-    throw RequestError(404, "please add id");
+    throw createError(404, "please add id");
   }
 
   const data = await Movie.findOneAndDelete({ _id: movieId, owner });
