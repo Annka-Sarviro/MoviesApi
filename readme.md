@@ -13,12 +13,6 @@
 
 ### API:
 
----
-
-**Use api on routes:**
-
---https://petly-be.herokuapp.com
-
 ```
 /================ Реєстрація/логанізація юзера =================/
 POST /auth/signup - реєстрація користувача (потребує  password, email, - обов'язкові, name )
