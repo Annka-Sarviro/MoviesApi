@@ -9,13 +9,7 @@
 
 ---
 
-### Branches:
 
----
-
-- 'dev' -- it contains last version of app;
-- 'main' -- deploy to heroku
--
 
 ### API:
 
