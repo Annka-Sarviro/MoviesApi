@@ -1,11 +1,12 @@
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
+const { handleError } = require("../helpers");
 
 const newSchema = Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: [true, "Enter title for movie"],
     },
 
     director: {
@@ -13,7 +14,7 @@ const newSchema = Schema(
       default: "No director",
     },
     date: {
-      type: Date,
+      type: String,
       default: "00-00-0000",
     },
 
@@ -26,12 +27,13 @@ const newSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Movie = model("movie", newSchema);
-
 const movieSchemaValidation = Joi.object({
   title: Joi.string().min(2).max(16).required(),
   director: Joi.string().empty(""),
-  date: Joi.date().empty(""),
+  date: Joi.string().empty(""),
 });
+newSchema.post("save", handleError);
+
+const Movie = model("movie", newSchema);
 
 module.exports = { Movie, movieSchemaValidation };

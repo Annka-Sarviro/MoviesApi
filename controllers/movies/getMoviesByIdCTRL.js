@@ -1,7 +1,7 @@
 const { RequestError } = require("../../helpers");
 const { ObjectId } = require("mongodb");
 
-const Movie = require("../../models/moviesModel");
+const { Movie } = require("../../models/moviesModel");
 
 const getMoviesByIdCTRL = async (req, res) => {
   const { id } = req.params;
@@ -13,13 +13,13 @@ const getMoviesByIdCTRL = async (req, res) => {
   }
   console.log(newId, "id");
   console.log("oner", owner);
-  const movie = await Movie.findById({ owner, _id: newId });
+  const movie = await Movie.findById({ _id: id, owner });
 
   if (!movie) {
-    return res.status(404).json({ message: "notice with such id not found" });
+    return res.status(404).json({ message: "movies with such id not found" });
   }
 
-  // return res.status(200).json({ movie });
+  return res.status(200).json({ movie });
 };
 
 module.exports = getMoviesByIdCTRL;

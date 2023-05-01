@@ -1,7 +1,7 @@
 const addMovie = require("./addMoviesCTRL");
-// const deleteNoticeCTRL = require("./deleteNoticeCTRL");
+const deleteMovieById = require("./deleteMovieCTRL");
 const getMoviesById = require("./getMoviesByIdCTRL");
 const getMovies = require("./getMovies");
+const updateMovie = require("./updateMovieCTRL");
 
-// module.exports = { getNoticesCTRL, addNoticeCTRL, getNoticeByIdCTRL, deleteNoticeCTRL };
-module.exports = { getMovies, getMoviesById, addMovie };
+module.exports = { getMovies, getMoviesById, addMovie, deleteMovieById, updateMovie };

@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.1",
-    "cloudinary": "^1.32.0",
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "^16.0.2",
@@ -21,9 +19,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.6.1",
-    "morgan": "1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "uuid": "^9.0.0"
+    "morgan": "1.10.0"
   },
   "devDependencies": {
     "eslint": "7.19.0",
@@ -38,13 +34,13 @@
   "main": ".eslintrc.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Max-Loktionov/nodejs-homework-rest-api.git"
+    "url": "git+https://github.com/Annka-Sarviro/MoviesApi.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Max-Loktionov/nodejs-homework-rest-api/issues"
+    "url": "https://github.com/Annka-Sarviro/MoviesApi.git/issues"
   },
-  "homepage": "https://github.com/Max-Loktionov/nodejs-homework-rest-api#readme"
+  "homepage": "https://github.com/Annka-Sarviro/MoviesApi.git#readme"
 }

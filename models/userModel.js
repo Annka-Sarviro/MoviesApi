@@ -4,13 +4,13 @@ const { handleError } = require("../helpers");
 
 const passwordMessage = "Passwords no contain space, min length 7 characters, max 32.";
 const emailRegex = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/;
-const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,24}/;
+// const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,24}/;
 
 const userSchema = new Schema(
   {
     password: {
       type: String,
-      match: passwordRegex,
+      // match: passwordRegex,
       required: [true, "Password is required"],
     },
     email: {
@@ -27,11 +27,6 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-
-    movieId: {
-      type: [{ type: Schema.Types.ObjectId }],
-      default: null,
-    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -41,7 +36,7 @@ userSchema.post("save", handleError);
 const registerJoiSchema = Joi.object({
   password: Joi.string()
     .trim()
-    .regex(passwordRegex)
+    // .regex(passwordRegex)
     .required()
     .messages({
       "string.empty": `password must contain value`,
