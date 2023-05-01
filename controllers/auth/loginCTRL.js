@@ -1,13 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../../models/user");
+const { User } = require("../../models/userModel");
 const { SECRET_KEY } = process.env;
 const createError = require("http-errors");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
   const user = await User.findOne({ email });
   if (!user) {
     throw createError(401, "Email or password is wrong");

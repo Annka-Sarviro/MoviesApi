@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 
-const newsSchema = Schema(
+const newSchema = Schema(
   {
     title: {
       type: String,
@@ -26,12 +26,12 @@ const newsSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Movie = model("movie", newsSchema);
+const Movie = model("movie", newSchema);
 
-const noticeSchemaValidation = Joi.object({
+const movieSchemaValidation = Joi.object({
   title: Joi.string().min(2).max(16).required(),
   director: Joi.string().empty(""),
   date: Joi.date().empty(""),
 });
 
-module.exports = { Movie, noticeSchemaValidation };
+module.exports = { Movie, movieSchemaValidation };

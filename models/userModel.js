@@ -2,8 +2,9 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 const { handleError } = require("../helpers");
 
-const passwordRegex = /^([A-z0-9!@#$%^&*().,<>{}[\]<>?_=+\-|;:\'\"\/])*[^\s]{7,32}$/;
 const passwordMessage = "Passwords no contain space, min length 7 characters, max 32.";
+const emailRegex = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/;
+const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,24}/;
 
 const userSchema = new Schema(
   {
@@ -14,6 +15,7 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
+      match: emailRegex,
       required: [true, "Email is required"],
       unique: true,
     },
@@ -25,29 +27,8 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    avatar: {
-      type: String,
-      default: "",
-    },
-    birthday: {
-      type: String,
-      default: "01.01.1900",
-    },
-    city: {
-      type: String,
-      default: "No city",
-    },
-    phone: {
-      type: String,
-      default: "No phone",
-    },
 
-    notieceId: {
-      type: [{ type: Schema.Types.ObjectId }],
-      default: null,
-    },
-
-    favoriteNoticeId: {
+    movieId: {
       type: [{ type: Schema.Types.ObjectId }],
       default: null,
     },
@@ -66,14 +47,11 @@ const registerJoiSchema = Joi.object({
       "string.empty": `password must contain value`,
       "string.pattern.base": `${passwordMessage}`,
     }),
-  email: Joi.string().trim().email().required().messages({
+  email: Joi.string().trim().email().regex(emailRegex).required().messages({
     "string.base": `email should be a type of string`,
     "string.empty": `email must contain value`,
   }),
   name: Joi.string().empty(""),
-  city: Joi.string().empty(""),
-  phone: Joi.string().empty(""),
-  birthday: Joi.string(),
   token: Joi.string(),
 });
 

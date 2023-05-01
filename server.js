@@ -4,6 +4,8 @@ const app = require("./app");
 
 const { DB_HOST, PORT = 3001 } = process.env;
 
+mongoose.set("strictQuery", false);
+
 mongoose
   .connect(DB_HOST, {
     useNewUrlParser: true,
@@ -11,9 +13,7 @@ mongoose
   })
   .then(() =>
     app.listen(PORT, () => {
-      console.log(
-        `Server running. API port: ${PORT}. Database connection successful`
-      );
+      console.log(`Server running. API port: ${PORT}. Database connection successful`);
     })
   )
   .catch(error => {
